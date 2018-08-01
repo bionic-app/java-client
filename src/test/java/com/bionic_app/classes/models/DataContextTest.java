@@ -1,6 +1,6 @@
 package com.bionic_app.classes.models;
 
-public class Context {
+public class DataContextTest {
     String id;
     String content;
 }
