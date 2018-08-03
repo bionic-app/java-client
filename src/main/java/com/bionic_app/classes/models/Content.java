@@ -2,6 +2,13 @@ package com.bionic_app.classes.models;
 
 public class Content {
 
+    public Content(String id, String contentType, String content)
+    {
+        this.id = id;
+        this.contentType = contentType;
+        this.content = content;
+    }
+
     public Content(String id, String contentType, String content, String reporterComments)
     {
         this.id = id;

@@ -21,23 +21,28 @@ public class FlaggedDataTest
     private FlaggedData flaggedData;
     private DataContext context;
     private Metadata metadata;
+    private User flaggedUser;
+    private User reportingUser;
 
     @Before
     public void setUp() {
         this.content = new Content("123", "34", "ldk", "ldkf");
         this.context = new DataContext("123", "bad", "https://my.link.com/123");
+        this.reportingUser = new User("123");
+        this.flaggedUser = new User("234");
         this.metadata = new Metadata();
         this.metadata.setItem("testKey", "testVal");
+
         this.flaggedData = new FlaggedData(
                 "abc",
+                this.content,
                 "123",
                 "234",
-                this.content,
+                this.flaggedUser,
+                this.reportingUser,
                 this.context,
-                this.metadata,
-                null,
-                null
-                );
+                this.metadata
+        );
     }
 
     @Test
@@ -47,6 +52,9 @@ public class FlaggedDataTest
         assertThat(this.flaggedData, hasProperty("typeId"));
         assertThat(this.flaggedData, hasProperty("categoryId"));
         assertThat(this.flaggedData, hasProperty("flaggedContent"));
+        assertThat(this.flaggedData, hasProperty("flaggedUser"));
+        assertThat(this.flaggedData, hasProperty("reportingUser"));
+        assertThat(this.flaggedData, hasProperty("metadata"));
     }
 
     @Test
@@ -56,13 +64,17 @@ public class FlaggedDataTest
         assertThat(this.flaggedData.getTypeId(), instanceOf(String.class));
         assertThat(this.flaggedData.getCategoryId(), instanceOf(String.class));
         assertThat(this.flaggedData.getFlaggedContent(), instanceOf(Content.class));
+        assertThat(this.flaggedData.getFlaggedUser(), instanceOf(User.class));
+        assertThat(this.flaggedData.getReportingUser(), instanceOf(User.class));
+        assertThat(this.flaggedData.getContext(), instanceOf(DataContext.class));
+        assertThat(this.flaggedData.getMetadata(), instanceOf(Metadata.class));
     }
 
     @Test
     public void flaggedDataSerializer_returnsCorrectObject()
     {
         Serializer serializer = new Serializer();
-        ObjectMapper mapper = serializer.getSerializer();
+        ObjectMapper mapper = serializer.getMapper();
         try {
             String generatedJson = mapper.writerWithDefaultPrettyPrinter().writeValueAsString(this.flaggedData);
             String expectedJson = "";
@@ -76,5 +88,14 @@ public class FlaggedDataTest
             e.printStackTrace();
         }
 
+    }
+
+    @Test
+    public void flaggedData_constructorOnlyRequiresClientKeyAndContent()
+    {
+        Content c = new Content("123", "text", "hello world");
+        FlaggedData fg = new FlaggedData("abc", c);
+        assertEquals(fg.getClientKey(), "abc");
+        assertThat(fg.getFlaggedContent(), instanceOf(Content.class));
     }
 }

@@ -7,5 +7,21 @@
     "content_type" : "34",
     "content" : "ldk",
     "reporter_comments" : "ldkf"
+  },
+  "context" : {
+    "id" : "123",
+    "content" : "bad",
+    "link" : "https://my.link.com/123"
+  },
+  "metadata" : {
+    "metadata" : {
+      "testKey" : "testVal"
+    }
+  },
+  "flagged_user" : {
+    "id" : "234"
+  },
+  "reporting_user" : {
+    "id" : "123"
   }
 }

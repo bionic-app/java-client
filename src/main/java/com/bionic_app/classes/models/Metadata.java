@@ -1,5 +1,6 @@
 package com.bionic_app.classes.models;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -14,7 +15,7 @@ public class Metadata {
         this.metadata = metadata;
     }
 
-    private Map<String, String> metadata;
+    private Map<String, String> metadata = new HashMap<>();
 
     Logger logger = Logger.getLogger(Metadata.class.getName());
 

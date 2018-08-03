@@ -1,6 +1,7 @@
 package com.bionic_app.classes;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 
@@ -8,15 +9,17 @@ public class Serializer
 {
     public Serializer()
     {
-        this.serializer = new ObjectMapper();
-        this.serializer.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+        this.mapper = new ObjectMapper();
+        this.mapper.
+                setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE).
+                setSerializationInclusion(Include.NON_NULL);
     }
 
-    private ObjectMapper serializer;
+    private ObjectMapper mapper;
 
 
-    public ObjectMapper getSerializer()
+    public ObjectMapper getMapper()
     {
-        return this.serializer;
+        return this.mapper;
     }
 }

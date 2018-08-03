@@ -1,28 +1,41 @@
-package com.bionic_app.classes;
+package com.bionic_app.classes.models;
 
 import com.bionic_app.classes.models.*;
 
 
-public class FlaggedData {
+public class FlaggedData extends Serializable {
+
+    //required params constructor
     public FlaggedData(
             String clientKey,
+            Content flaggedContent
+    )
+    {
+        super();
+        this.clientKey = clientKey;
+        this.flaggedContent = flaggedContent;
+    }
+
+    public FlaggedData(
+            String clientKey,
+            Content flaggedContent,
             String typeId,
             String categoryId,
-            Content flaggedContent,
-            DataContext context,
-            Metadata metadata,
             User flaggedUser,
-            User reportingUser
-            )
+            User reportingUser,
+            DataContext context,
+            Metadata metadata
+    )
     {
+        super();
         this.clientKey = clientKey;
         this.typeId = typeId;
         this.categoryId = categoryId;
         this.flaggedContent = flaggedContent;
-        this.context = context;
-        this.metadata = metadata;
         this.flaggedUser = flaggedUser;
         this.reportingUser = reportingUser;
+        this.context = context;
+        this.metadata = metadata;
     }
 
 
@@ -35,6 +48,10 @@ public class FlaggedData {
     private Metadata metadata;
     private User flaggedUser;
     private User reportingUser;
+
+    //METHODS
+
+    //GETTERS & SETTERS
 
     public String getClientKey() {
         return clientKey;
