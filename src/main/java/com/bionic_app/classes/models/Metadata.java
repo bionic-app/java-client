@@ -1,5 +1,7 @@
 package com.bionic_app.classes.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Logger;
@@ -16,8 +18,8 @@ public class Metadata {
     }
 
     private Map<String, String> metadata = new HashMap<>();
-
-    Logger logger = Logger.getLogger(Metadata.class.getName());
+    @JsonIgnore
+    private Logger logger = Logger.getLogger(Metadata.class.getName());
 
     public void setItem(String key, String val)
     {

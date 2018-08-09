@@ -11,6 +11,7 @@ import static org.hamcrest.Matchers.instanceOf;
 import java.nio.file.*;
 import java.io.IOException;
 
+import com.bionic_app.api_client.Serializer;
 import com.bionic_app.classes.models.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,7 +27,7 @@ public class FlaggedDataTest
 
     @Before
     public void setUp() {
-        this.content = new Content("123", "34", "ldk", "ldkf");
+        this.content = new Content("123", Content.ContentType.TEXT, "ldk", "ldkf");
         this.context = new DataContext("123", "bad", "https://my.link.com/123");
         this.reportingUser = new User("123");
         this.flaggedUser = new User("234");
@@ -63,7 +64,7 @@ public class FlaggedDataTest
         assertThat(this.flaggedData.getClientKey(), instanceOf(String.class));
         assertThat(this.flaggedData.getTypeId(), instanceOf(String.class));
         assertThat(this.flaggedData.getCategoryId(), instanceOf(String.class));
-        assertThat(this.flaggedData.getFlaggedContent(), instanceOf(Content.class));
+        assertThat(this.flaggedData.getContent(), instanceOf(Content.class));
         assertThat(this.flaggedData.getFlaggedUser(), instanceOf(User.class));
         assertThat(this.flaggedData.getReportingUser(), instanceOf(User.class));
         assertThat(this.flaggedData.getContext(), instanceOf(DataContext.class));
@@ -93,9 +94,9 @@ public class FlaggedDataTest
     @Test
     public void flaggedData_constructorOnlyRequiresClientKeyAndContent()
     {
-        Content c = new Content("123", "text", "hello world");
+        Content c = new Content("123", Content.ContentType.TEXT, "hello world");
         FlaggedData fg = new FlaggedData("abc", c);
         assertEquals(fg.getClientKey(), "abc");
-        assertThat(fg.getFlaggedContent(), instanceOf(Content.class));
+        assertThat(fg.getContent(), instanceOf(Content.class));
     }
 }

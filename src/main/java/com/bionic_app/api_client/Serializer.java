@@ -1,4 +1,4 @@
-package com.bionic_app.classes;
+package com.bionic_app.api_client;
 
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;

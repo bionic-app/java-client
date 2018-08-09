@@ -8,17 +8,17 @@ public class FlaggedData extends Serializable {
     //required params constructor
     public FlaggedData(
             String clientKey,
-            Content flaggedContent
+            Content content
     )
     {
         super();
         this.clientKey = clientKey;
-        this.flaggedContent = flaggedContent;
+        this.content = content;
     }
 
     public FlaggedData(
             String clientKey,
-            Content flaggedContent,
+            Content content,
             String typeId,
             String categoryId,
             User flaggedUser,
@@ -31,7 +31,7 @@ public class FlaggedData extends Serializable {
         this.clientKey = clientKey;
         this.typeId = typeId;
         this.categoryId = categoryId;
-        this.flaggedContent = flaggedContent;
+        this.content = content;
         this.flaggedUser = flaggedUser;
         this.reportingUser = reportingUser;
         this.context = context;
@@ -43,7 +43,7 @@ public class FlaggedData extends Serializable {
     private String clientKey;
     private String typeId;
     private String categoryId;
-    private Content flaggedContent;
+    private Content content;
     private DataContext context;
     private Metadata metadata;
     private User flaggedUser;
@@ -77,12 +77,12 @@ public class FlaggedData extends Serializable {
         this.categoryId = categoryId;
     }
 
-    public Content getFlaggedContent() {
-        return flaggedContent;
+    public Content getContent() {
+        return content;
     }
 
-    public void setFlaggedContent(Content flaggedContent) {
-        this.flaggedContent = flaggedContent;
+    public void setContent(Content content) {
+        this.content = content;
     }
 
     public DataContext getContext() {

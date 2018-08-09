@@ -1,10 +1,8 @@
 package com.bionic_app.classes.models;
 
-import com.bionic_app.classes.Serializer;
+import com.bionic_app.api_client.Serializer;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.lang.reflect.Type;
 
 public class Serializable {
 

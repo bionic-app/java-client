@@ -2,14 +2,14 @@ package com.bionic_app.classes.models;
 
 public class Content {
 
-    public Content(String id, String contentType, String content)
+    public Content(String id, ContentType contentType, String content)
     {
         this.id = id;
         this.contentType = contentType;
         this.content = content;
     }
 
-    public Content(String id, String contentType, String content, String reporterComments)
+    public Content(String id, ContentType contentType, String content, String reporterComments)
     {
         this.id = id;
         this.contentType = contentType;
@@ -17,8 +17,12 @@ public class Content {
         this.reporterComments = reporterComments;
     }
 
+    public enum ContentType {
+        TEXT, IMAGE, VIDEO
+    }
+
     private String id;
-    private String contentType;
+    ContentType contentType;
     private String content;
     private String reporterComments;
 
@@ -30,11 +34,11 @@ public class Content {
         this.id = id;
     }
 
-    public String getContentType() {
+    public ContentType getContentType() {
         return contentType;
     }
 
-    public void setContentType(String contentType) {
+    public void setContentType(ContentType contentType) {
         this.contentType = contentType;
     }
 

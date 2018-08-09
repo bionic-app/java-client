@@ -2,7 +2,7 @@
   "client_key" : "abc",
   "type_id" : "123",
   "category_id" : "234",
-  "flagged_content" : {
+  "content" : {
     "id" : "123",
     "content_type" : "34",
     "content" : "ldk",
