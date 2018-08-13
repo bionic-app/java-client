@@ -52,7 +52,7 @@ public class FlaggedDataTest
         assertThat(this.flaggedData, hasProperty("clientKey"));
         assertThat(this.flaggedData, hasProperty("typeId"));
         assertThat(this.flaggedData, hasProperty("categoryId"));
-        assertThat(this.flaggedData, hasProperty("flaggedContent"));
+        assertThat(this.flaggedData, hasProperty("content"));
         assertThat(this.flaggedData, hasProperty("flaggedUser"));
         assertThat(this.flaggedData, hasProperty("reportingUser"));
         assertThat(this.flaggedData, hasProperty("metadata"));
