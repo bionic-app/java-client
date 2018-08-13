@@ -18,7 +18,7 @@ public class Content {
     }
 
     public enum ContentType {
-        TEXT, IMAGE, VIDEO
+        TEXT, IMAGE, VIDEO;
     }
 
     private String id;

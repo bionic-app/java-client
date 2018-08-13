@@ -3,6 +3,7 @@ package com.bionic_app.api_client;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -12,6 +13,7 @@ import java.util.logging.Logger;
 import javax.net.ssl.HttpsURLConnection;
 
 import com.bionic_app.api_client.Settings;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 
@@ -47,23 +49,25 @@ public class Requester
     //this returns void because we don't care if it's a success or not in production...
     //Turn on debug in settings to log responses
     public void post(String json) throws IOException {
-        logger.info("started request to bionic");
-        ObjectMapper mapper = this.serializer.getMapper();
-        Object js = mapper.readValue(json, Object.class);
-        logger.info("JSON data: " + mapper.writerWithDefaultPrettyPrinter().writeValueAsString(js));
+
+        if (this.settings.isDebug()) {
+            this.logOnDebug(json);
+        }
+
         HttpsURLConnection req = (HttpsURLConnection)url.openConnection();
         req.setRequestMethod("POST");
         req.setRequestProperty("Content-Type", "application/json");
 
         req.setDoOutput(true);
 
-        OutputStreamWriter wr = new OutputStreamWriter(req.getOutputStream());
-        wr.write(json);
+        OutputStream os = req.getOutputStream();
+        os.write(json.getBytes());
+        os.close();
 
         int status = req.getResponseCode();
         logger.info(Integer.toString(status));
 
-        if (status == 400) {
+        if (status >= 400) {
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(req.getErrorStream())
             );
@@ -73,11 +77,28 @@ public class Requester
                 content.append(inputLine);
             }
             in.close();
-            logger.info(content.toString());
+            logger.warning(content.toString());
         }
 
         req.disconnect();
 
+    }
+
+    private void logOnDebug(String json)
+    {
+        logger.info("Started request to bionic");
+        ObjectMapper mapper = this.serializer.getMapper();
+        Object js = null;
+        try {
+            js = mapper.readValue(json, Object.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            logger.info("JSON data: " + mapper.writerWithDefaultPrettyPrinter().writeValueAsString(js));
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
     }
 
 

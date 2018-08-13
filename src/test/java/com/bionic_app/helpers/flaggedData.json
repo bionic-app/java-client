@@ -4,7 +4,7 @@
   "category_id" : "234",
   "content" : {
     "id" : "123",
-    "content_type" : "34",
+    "content_type" : "text",
     "content" : "ldk",
     "reporter_comments" : "ldkf"
   },
